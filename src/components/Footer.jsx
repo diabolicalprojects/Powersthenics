@@ -1,0 +1,83 @@
+import { Camera, Zap, Flame, Video, Target, Facebook, Music } from 'lucide-react';
+
+const Footer = () => {
+  return (
+    <footer className="bg-carbon-black border-t border-white/10 pt-24 pb-12 overflow-hidden">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
+          <div className="col-span-2">
+            <div className="flex items-center gap-4 mb-8">
+               <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+               <h2 className="text-4xl font-[900] text-white tracking-tighter leading-none italic uppercase">
+                POWER<span className="text-competition-green">STHENICS</span>
+              </h2>
+            </div>
+            <p className="text-xl text-white/40 font-bold uppercase tracking-widest max-w-lg mb-10">
+              NOS VEMOS EN LA BARRA. EL PODER NO SE PIDE, SE CONSTRUYE.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a 
+                href="https://www.instagram.com/powersthenics_mx/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="px-4 py-2 border border-white/10 flex items-center gap-3 hover:bg-competition-green hover:text-carbon-black transition-all group"
+              >
+                <Camera size={18} className="text-competition-green group-hover:text-carbon-black" />
+                <span className="text-[10px] font-black tracking-widest uppercase">Instagram</span>
+              </a>
+              <a 
+                href="https://www.facebook.com/powersthenics.mx" 
+                target="_blank" 
+                rel="noreferrer"
+                className="px-4 py-2 border border-white/10 flex items-center gap-3 hover:bg-competition-green hover:text-carbon-black transition-all group"
+              >
+                <Facebook size={18} className="text-competition-green group-hover:text-carbon-black" />
+                <span className="text-[10px] font-black tracking-widest uppercase">Facebook</span>
+              </a>
+              <a 
+                href="https://www.tiktok.com/@powersthenics" 
+                target="_blank" 
+                rel="noreferrer"
+                className="px-4 py-2 border border-white/10 flex items-center gap-3 hover:bg-competition-green hover:text-carbon-black transition-all group"
+              >
+                <Music size={18} className="text-competition-green group-hover:text-carbon-black" />
+                <span className="text-[10px] font-black tracking-widest uppercase">TikTok</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+             <h4 className="text-sm font-black text-competition-green tracking-[0.3em] mb-8 italic">ENLACES</h4>
+             <div className="flex flex-col gap-4 text-white font-bold tracking-widest uppercase">
+                <a href="#features" className="hover:text-competition-green transition-colors">Rutinas</a>
+                <a href="#galeria" className="hover:text-competition-green transition-colors">Dominio</a>
+                <a href="#muro" className="hover:text-competition-green transition-colors">Comunidad</a>
+             </div>
+          </div>
+
+          <div>
+             <h4 className="text-sm font-black text-competition-green tracking-[0.3em] mb-8 italic">SOPORTE</h4>
+             <div className="flex flex-col gap-4 text-white font-bold tracking-widest uppercase">
+                <a href="#precios" className="hover:text-competition-green transition-colors">Membresías</a>
+                <a href="#" className="hover:text-competition-green transition-colors">Privacidad</a>
+                <a href="#contacto" className="hover:text-competition-green transition-colors">Contacto</a>
+             </div>
+          </div>
+        </div>
+
+        <div className="text-center md:text-left border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-xs text-white/40 font-black uppercase tracking-widest">
+            © 2026 POWERSTHENICS. TODOS LOS DERECHOS RESERVADOS.
+          </p>
+          <div className="flex items-center gap-2">
+             <div className="h-1 w-8 bg-competition-green" />
+             <span className="text-xs text-white uppercase font-black tracking-widest">FUELLED BY ELITE ATHLETES</span>
+             <div className="h-1 w-8 bg-competition-green" />
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
