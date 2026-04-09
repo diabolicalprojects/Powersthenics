@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ChevronRight } from 'lucide-react';
 
 const Hero = () => {
   const containerRef = useRef(null);
