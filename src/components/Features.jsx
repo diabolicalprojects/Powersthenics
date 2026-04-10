@@ -71,7 +71,7 @@ const Features = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 md:mb-20 text-center md:text-left">
           <div>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black leading-none uppercase">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black leading-none uppercase">
               EQUIPAMIENTO<br /> <span className="text-competition-green">PARA ÉLITE</span>
             </h2>
             <div className="h-1 w-24 bg-competition-green mt-6 mx-auto md:mx-0" />
@@ -107,7 +107,7 @@ const Features = () => {
              <p className="text-base sm:text-lg md:text-xl font-black italic tracking-widest text-competition-green mb-4">
                 AUMENTO DE FUERZA
              </p>
-             <h4 className="text-6xl sm:text-7xl md:text-9xl font-[900] font-jersey leading-none text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+             <h4 className="text-6xl sm:text-7xl md:text-7xl font-[900] font-jersey leading-none text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                 +{count}%
              </h4>
              <p className="text-white/60 mt-6 uppercase tracking-[0.3em] font-bold text-[10px] sm:text-xs md:text-sm">
