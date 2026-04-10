@@ -30,6 +30,28 @@ const Gallery = () => {
     setSelectedIdx(prev => (prev < images.length - 1 ? prev + 1 : 0));
   };
 
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipedistance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (swipedistance > minSwipeDistance) {
+      handleNext();
+    } else if (swipedistance < -minSwipeDistance) {
+      handlePrev();
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (selectedIdx === null) return;
@@ -81,8 +103,11 @@ const Gallery = () => {
       {/* Lightbox Modal */}
       {selectedIdx !== null && (
         <div 
-          className="fixed inset-0 z-[1000] bg-carbon-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+          className="fixed inset-0 z-[1000] bg-carbon-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10 touch-none"
           onClick={() => setSelectedIdx(null)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {/* Close Button */}
           <button 
@@ -94,14 +119,14 @@ const Gallery = () => {
 
           {/* Navigation Buttons */}
           <button 
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/30 hover:text-competition-green transition-all z-[1001] p-2 hover:scale-110 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm"
+            className="hidden md:flex absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/30 hover:text-competition-green transition-all z-[1001] p-2 hover:scale-110 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm"
             onClick={handlePrev}
           >
             <ChevronLeft size={48} strokeWidth={1} />
           </button>
 
           <button 
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/30 hover:text-competition-green transition-all z-[1001] p-2 hover:scale-110 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm"
+            className="hidden md:flex absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/30 hover:text-competition-green transition-all z-[1001] p-2 hover:scale-110 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm"
             onClick={handleNext}
           >
             <ChevronRight size={48} strokeWidth={1} />
@@ -116,7 +141,7 @@ const Gallery = () => {
             key={selectedIdx}
             src={images[selectedIdx]} 
             alt="Gym Gallery Full" 
-            className="max-w-full max-h-full object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 animate-in zoom-in duration-300 pointer-events-none"
+            className="max-w-full max-h-[85vh] object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 animate-in zoom-in duration-300 pointer-events-none"
           />
         </div>
       )}
