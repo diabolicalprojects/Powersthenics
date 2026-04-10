@@ -7,11 +7,11 @@ gsap.registerPlugin(ScrollTrigger);
 const WallCard = ({ level, desc, img, number }) => {
   const handleDetailsClick = () => {
     const text = `Hola! Quiero más detalles sobre la etapa ${number} (${level}).`;
-    window.open(`https://wa.me/524495136907?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=524495136907&text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
-    <div className="relative group w-full max-w-5xl mx-auto h-[450px] overflow-hidden border-l-4 border-competition-green bg-cement-gray/20">
+    <div className="relative group w-full max-w-7xl mx-auto h-[450px] lg:h-[550px] overflow-hidden border-l-4 border-competition-green bg-cement-gray/20 transition-all duration-500 hover:bg-cement-gray/30">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 

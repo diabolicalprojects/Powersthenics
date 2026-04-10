@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {
   const sectionRef = useRef(null);
+  const [selectedImg, setSelectedImg] = React.useState(null);
   
   const images = [
     "/466795676_17999912591703592_71864999979196931_n.jpg",
@@ -40,7 +41,6 @@ const Gallery = () => {
         }
       );
 
-      // Horizontal scroll effect for the header text
       gsap.to(".gallery-scroll-text", {
         xPercent: -20,
         scrollTrigger: {
@@ -54,7 +54,28 @@ const Gallery = () => {
   }, []);
 
   return (
-    <section id="galeria" ref={sectionRef} className="py-24 bg-carbon-black overflow-hidden">
+    <section id="galeria" ref={sectionRef} className="py-24 bg-carbon-black overflow-hidden relative">
+      {/* Lightbox Modal */}
+      {selectedImg && (
+        <div 
+          className="fixed inset-0 z-[1000] bg-carbon-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10 cursor-zoom-out"
+          onClick={() => setSelectedImg(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white/50 hover:text-competition-green transition-colors z-50 p-2"
+            onClick={() => setSelectedImg(null)}
+          >
+            <X size={40} strokeWidth={1.5} />
+          </button>
+          
+          <img 
+            src={selectedImg} 
+            alt="Gym Gallery Full" 
+            className="max-w-full max-h-full object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 animate-in zoom-in duration-300"
+          />
+        </div>
+      )}
+
       <div className="relative mb-20">
         <div className="gallery-scroll-text whitespace-nowrap opacity-[0.03] select-none pointer-events-none">
           <span className="text-[15rem] font-black italic text-white uppercase tracking-tighter">
@@ -71,7 +92,11 @@ const Gallery = () => {
       <div className="container mx-auto px-6">
         <div className="columns-1 md:columns-2 lg:columns-4 gap-6 space-y-6">
           {images.map((img, idx) => (
-            <div key={idx} className="gallery-item relative group overflow-hidden break-inside-avoid">
+            <div 
+              key={idx} 
+              className="gallery-item relative group overflow-hidden break-inside-avoid cursor-zoom-in"
+              onClick={() => setSelectedImg(img)}
+            >
               <img 
                 src={img} 
                 loading="lazy"
@@ -81,7 +106,7 @@ const Gallery = () => {
               <div className="absolute inset-0 border-2 border-competition-green/0 group-hover:border-competition-green/40 transition-all duration-500" />
               <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity">
                  <span className="bg-competition-green text-carbon-black px-3 py-1 text-[10px] font-black italic tracking-tighter">
-                    SHOT_{idx + 1}
+                    VIEW_SHOT_{idx + 1}
                  </span>
               </div>
             </div>

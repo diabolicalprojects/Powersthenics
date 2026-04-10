@@ -14,35 +14,44 @@ const Hero = () => {
     let ctx = gsap.context(() => {
       const tl = gsap.timeline();
       tl.fromTo(textRef.current, 
-        { scale: 1.2, opacity: 0, y: 100 }, 
-        { scale: 1, opacity: 1, y: 0, duration: 1, ease: "expo.out" }
+        { scale: 1.1, opacity: 0, y: 50 }, 
+        { scale: 1, opacity: 1, y: 0, duration: 1.2, ease: "expo.out" }
       );
       
-      gsap.fromTo(".hero-btn", 
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.2,
-          duration: 1,
-          delay: 0.5,
-          ease: "power3.out"
+      // Floating animation for text
+      gsap.to(textRef.current, {
+        y: -10,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut"
+      });
+
+      // Parallax Video
+      gsap.to(".hero-video-container", {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true
         }
-      );
+      });
     }, containerRef.current);
     return () => ctx.revert();
   }, []);
 
   return (
     <section id="home" className="relative min-h-screen bg-carbon-black flex items-center overflow-hidden pt-20">
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6" ref={containerRef}>
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6" ref={containerRef}>
         <div ref={textRef}>
-          <div className="relative z-10 w-full lg:w-2/3">
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[0.85] tracking-tighter italic uppercase text-white mb-4">
+          <div className="relative z-10 w-full lg:w-2/3 2xl:w-1/2">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl 2xl:text-[12rem] font-black leading-[0.8] tracking-tighter italic uppercase text-white mb-6">
               FORJA TU <br />
               <span className="text-competition-green text-stroke-sm">LEGADO</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-2xl font-bold text-white/60 mb-10 max-w-xl uppercase tracking-widest leading-relaxed">
+            <p className="text-base sm:text-lg md:text-2xl 2xl:text-3xl font-bold text-white/60 mb-12 max-w-xl 2xl:max-w-2xl uppercase tracking-widest leading-relaxed">
               Domina la gravedad. Supera tus límites. 
               Calistenia de alto rendimiento para atletas de élite.
             </p>
@@ -68,9 +77,9 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Absolute Background Video */}
+      {/* Absolute Background Video Container */}
       <div className="absolute top-0 right-0 w-full lg:w-3/4 h-full pointer-events-none overflow-hidden select-none">
-        <div className="absolute inset-0 bg-carbon-black">
+        <div className="hero-video-container absolute inset-0 bg-carbon-black h-[120%]">
           <video 
             autoPlay 
             muted 
