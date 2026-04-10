@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -6,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {
   const sectionRef = useRef(null);
-  const [selectedImg, setSelectedImg] = React.useState(null);
+  const [selectedImg, setSelectedImg] = useState(null);
   
   const images = [
     "/466795676_17999912591703592_71864999979196931_n.jpg",
