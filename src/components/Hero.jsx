@@ -75,8 +75,9 @@ const Hero = () => {
             autoPlay 
             muted 
             loop 
-            playsInline
-            className="w-full h-full object-cover opacity-50 grayscale contrast-125"
+            playsInline 
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 opacity-60"
           >
             <source src="/E1176cbd-Be69-42D3-93Ee-4255226413D2.mp4" type="video/mp4" />
           </video>

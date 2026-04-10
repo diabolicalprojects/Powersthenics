@@ -74,6 +74,7 @@ const Gallery = () => {
             <div key={idx} className="gallery-item relative group overflow-hidden break-inside-avoid">
               <img 
                 src={img} 
+                loading="lazy"
                 className="w-full h-auto object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                 alt={`Gym image ${idx + 1}`}
               />

@@ -53,16 +53,17 @@ const Chatbot = () => {
 
   const sendToWhatsApp = () => {
     const adminPhone = "524495136907";
-    const message = `\u{1F525} *NUEVO ATLETA - POWERSTHENICS* \u{1F525}\n\n` +
-      `\u{26A1} *Nombre:* ${name}\n` +
-      `\u{1F4F1} *WhatsApp:* ${phone}\n\n` +
-      `\u{1F3AF} *Objetivo:* ${responses.objective}\n` +
-      `\u{1F4AA} *Nivel:* ${responses.level}\n` +
-      `\u{1F680} *Interés:* ${responses.interest === 'yes' ? 'EMPEZAR YA' : 'SOLO INFO'}\n\n` +
+    // Usando pares subalternos (Surrogate Pairs) para máxima compatibilidad
+    const message = `\uD83D\uDD25 *NUEVO ATLETA - POWERSTHENICS* \uD83D\uDD25\n\n` +
+      `\u26A1 *Nombre:* ${name}\n` +
+      `\uD83D\uDCF1 *WhatsApp:* ${phone}\n\n` +
+      `\uD83C\uDFAF *Objetivo:* ${responses.objective}\n` +
+      `\uD83D\uDCAA *Nivel:* ${responses.level}\n` +
+      `\uD83D\uDE80 *Interés:* ${responses.interest === 'yes' ? 'EMPEZAR YA' : 'SOLO INFO'}\n\n` +
       `--- _Enviado desde el Asistente Powersthenics_ ---`;
     
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/${adminPhone}?text=${encodedMessage}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=${adminPhone}&text=${encodedMessage}`, '_blank');
   };
 
   const steps = [

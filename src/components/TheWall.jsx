@@ -17,6 +17,7 @@ const WallCard = ({ level, desc, img, number }) => {
         <img 
           src={img || "/hero.png"} 
           alt={level} 
+          loading="lazy"
           className="w-full h-full object-cover opacity-20 group-hover:opacity-60 transition-all duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-carbon-black via-carbon-black/80 to-transparent" />
