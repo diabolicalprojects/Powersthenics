@@ -1,0 +1,8 @@
+services:
+  app-unique-link:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./access_locks.json:/app/access_locks.json
+    restart: always
