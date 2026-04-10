@@ -10,71 +10,106 @@ const app = express();
 const PORT = process.env.PORT || 80;
 const DATA_FILE = path.join(__dirname, 'access_locks.json');
 
-// Ensure data file exists
-if (!fs.existsSync(DATA_FILE)) {
-    fs.writeFileSync(DATA_FILE, JSON.stringify({}));
+// Initialize data file safely
+function loadLocks() {
+    try {
+        if (!fs.existsSync(DATA_FILE)) {
+            fs.writeFileSync(DATA_FILE, JSON.stringify({}));
+            return {};
+        }
+        const content = fs.readFileSync(DATA_FILE, 'utf8');
+        if (!content.trim()) {
+            return {};
+        }
+        return JSON.parse(content);
+    } catch (err) {
+        console.error('Error loading locks file:', err);
+        return {};
+    }
 }
 
 // Logic for Unique Link
 app.use((req, res, next) => {
-    // Exclude static assets from lock logic (optional, but cleaner for resources)
-    if (req.path.includes('.') && !req.path.endsWith('.html')) {
-        return next();
-    }
-
-    const token = req.query.t;
-    const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-
-    // Load current locks
-    const locks = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-
-    if (!token) {
-        // If no token, we can decide to block OR allow general viewing.
-        // User asked for "prospectos no puedan compartir", implying the token identifies the prospect.
-        // Let's allow access ONLY with a token for demos.
-        return res.status(403).send(`
-            <div style="font-family:sans-serif; text-align:center; padding:50px;">
-                <h1>Acceso Denegado</h1>
-                <p>Este recurso requiere un enlace de acceso único.</p>
-            </div>
-        `);
-    }
-
-    if (!locks[token]) {
-        // First access: LOCK the token to this IP
-        locks[token] = {
-            ip: clientIp,
-            firstAccess: new Date().toISOString(),
-            userAgent: req.headers['user-agent']
-        };
-        fs.writeFileSync(DATA_FILE, JSON.stringify(locks, null, 2));
-        console.log(`Token ${token} locked to IP ${clientIp}`);
-        return next();
-    } else {
-        // Subsequent access: Verify IP
-        if (locks[token].ip === clientIp) {
+    try {
+        // Exclude static assets from lock logic
+        if (req.path.includes('.') && !req.path.endsWith('.html')) {
             return next();
-        } else {
-            console.log(`Access denied for token ${token}. Original: ${locks[token].ip}, Current: ${clientIp}`);
+        }
+
+        const token = req.query.t;
+        // Get IP behind proxy
+        const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+
+        const locks = loadLocks();
+
+        if (!token) {
             return res.status(403).send(`
-                <div style="font-family:sans-serif; text-align:center; padding:50px; background:#f8d7da; color:#721c24; border-radius:10px; margin:20px;">
-                    <h1>⚠️ Enlace No Válido</h1>
-                    <p>Este enlace es personal e intransferible. Ya ha sido utilizado desde otro dispositivo.</p>
-                    <p style="font-size:0.8em;">Si crees que esto es un error, contacta con tu asesor comercial.</p>
+                <div style="font-family:sans-serif; text-align:center; padding:50px; background:#f0f0f0; height:100vh;">
+                    <div style="max-width:500px; margin:auto; background:white; padding:40px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.05);">
+                        <h1 style="color:#333;">Acceso Restringido</h1>
+                        <p style="color:#666;">Este recurso requiere un enlace de acceso único generado para un prospecto específico.</p>
+                    </div>
                 </div>
             `);
         }
+
+        if (!locks[token]) {
+            // First access: LOCK the token to this IP
+            locks[token] = {
+                ip: clientIp,
+                firstAccess: new Date().toISOString(),
+                userAgent: req.headers['user-agent']
+            };
+            fs.writeFileSync(DATA_FILE, JSON.stringify(locks, null, 2));
+            console.log(`[AUTH] Token "${token}" successfully locked to IP: ${clientIp}`);
+            return next();
+        } else {
+            // Subsequent access: Verify IP
+            if (locks[token].ip === clientIp) {
+                return next();
+            } else {
+                console.log(`[AUTH] Access denied for token "${token}". Original: ${locks[token].ip}, Current: ${clientIp}`);
+                return res.status(403).send(`
+                    <div style="font-family:sans-serif; text-align:center; padding:50px; background:#fff5f5; height:100vh; display:flex; align-items:center;">
+                        <div style="max-width:500px; margin:auto; background:white; padding:40px; border-radius:15px; border:2px solid #feb2b2; box-shadow:0 10px 30px rgba(229, 62, 62, 0.1);">
+                            <h1 style="color:#c53030; font-size:2em;">⚠️ Enlace No Válido</h1>
+                            <p style="color:#742a2a; line-height:1.6; font-size:1.1em;">
+                                Este enlace es <strong>personal e intransferible</strong>.<br> 
+                                Ya ha sido utilizado desde otro dispositivo o ubicación.
+                            </p>
+                            <p style="color:#9b2c2c; font-size:0.9em; margin-top:20px; border-top:1px solid #fed7d7; pt:15px;">
+                                Si eres el propietario legítimo y crees que esto es un error (por ejemplo, cambiaste de red), contacta con el asesor que te envió el enlace.
+                            </p>
+                        </div>
+                    </div>
+                `);
+            }
+        }
+    } catch (err) {
+        console.error('Middleware Error:', err);
+        next(); // Proceed to app even if auth fails, to avoid 500? Or show error.
     }
 });
 
 // Serve the built React/Vite app
-app.use(express.static(path.join(__dirname, 'dist')));
+const distPath = path.join(__dirname, 'dist');
+if (!fs.existsSync(distPath)) {
+    console.error('ERROR: "dist" folder not found. Make sure to run the build command.');
+}
+
+app.use(express.static(distPath));
 
 // SPA Fallback
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    const indexPath = path.join(distPath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+    } else {
+        res.status(404).send('Application build not found.');
+    }
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Gateway server running on port ${PORT}`);
+    console.log(`[GATEWAY] Running on port ${PORT}`);
+    console.log(`[GATEWAY] Persistent data at: ${DATA_FILE}`);
 });

@@ -30,10 +30,7 @@ COPY --from=builder /app/dist ./dist
 # Copy the server script
 COPY server.js ./
 
-# Create the data file for persistent locks
-RUN touch access_locks.json
-
-# Expose port (Internal)
+# Expose port
 EXPOSE 80
 
 # Environment variables
