@@ -78,14 +78,18 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="text-center md:text-left border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs text-white/40 font-black uppercase tracking-widest">
+        <div className="text-center md:text-left border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-[10px] text-white/40 font-black uppercase tracking-widest">
             © 2026 POWERSTHENICS. TODOS LOS DERECHOS RESERVADOS.
           </p>
-          <div className="flex items-center gap-2">
-             <div className="h-1 w-8 bg-competition-green" />
-             <span className="text-xs text-white uppercase font-black tracking-widest">FUELLED BY ELITE ATHLETES</span>
-             <div className="h-1 w-8 bg-competition-green" />
+          
+          <div className="flex flex-col items-center md:items-end gap-3">
+             <span className="text-[9px] text-white/30 font-black tracking-[0.4em] uppercase">DESIGNED & DEVELOPED BY</span>
+             <img 
+              src="/LOGO-DIABOLICAL-HORIZONTAL-BLANCO@2x.png" 
+              alt="Diabolical" 
+              className="h-5 md:h-6 w-auto opacity-50 hover:opacity-100 transition-opacity cursor-pointer" 
+             />
           </div>
         </div>
       </div>
