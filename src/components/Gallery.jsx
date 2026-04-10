@@ -61,8 +61,8 @@ const Gallery = () => {
             COMMUNITY POWER STRENGTH DISCIPLINE COMMUNITY POWER STRENGTH DISCIPLINE
           </span>
         </div>
-        <div className="absolute inset-0 flex items-center justify-center">
-            <h2 className="text-6xl md:text-8xl font-black text-white italic tracking-tighter z-10">
+        <div className="absolute inset-0 flex items-center justify-center p-4">
+            <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-white italic tracking-tighter z-10 text-center">
                 NUESTRO <span className="text-competition-green">DOMINIO</span>
             </h2>
         </div>

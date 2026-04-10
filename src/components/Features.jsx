@@ -13,13 +13,13 @@ const FeatureCard = ({ title, img, icon: Icon }) => (
       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-100" 
     />
     <div className="absolute inset-0 bg-gradient-to-t from-carbon-black via-carbon-black/40 to-transparent p-10 flex flex-col justify-end">
-      <div className="bg-competition-green text-carbon-black p-3 w-fit mb-6 shadow-[0_0_15px_rgba(74,222,128,0.3)]">
+      <div className="bg-competition-green text-carbon-black p-3 w-fit mb-6 shadow-[0_0_15px_rgba(199,247,0,0.3)]">
         <Icon size={28} strokeWidth={3} />
       </div>
-      <h3 className="text-4xl font-black text-white leading-tight">
+      <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight">
         {title}
       </h3>
-      <div className="h-1 w-0 group-hover:w-full bg-competition-green transition-all duration-300 mt-4 shadow-[0_0_10px_#4ADE80]" />
+      <div className="h-1 w-0 group-hover:w-full bg-competition-green transition-all duration-300 mt-4 shadow-[0_0_10px_#C7F700]" />
     </div>
   </div>
 );
@@ -70,12 +70,12 @@ const Features = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 md:mb-20 text-center md:text-left">
           <div>
-            <h2 className="text-5xl md:text-7xl font-black leading-none uppercase">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-black leading-none uppercase">
               EQUIPAMIENTO<br /> <span className="text-competition-green">PARA ÉLITE</span>
             </h2>
             <div className="h-1 w-24 bg-competition-green mt-6 mx-auto md:mx-0" />
           </div>
-          <p className="max-w-md text-white/50 text-center md:text-right uppercase tracking-widest font-bold mt-8 md:mt-0 text-xs md:text-sm">
+          <p className="max-w-md text-white/50 text-center md:text-right uppercase tracking-widest font-bold mt-8 md:mt-0 text-[10px] sm:text-xs md:text-sm leading-loose">
             Sin excusas. Sin límites. Solo resultados tangibles.
           </p>
         </div>
@@ -95,24 +95,24 @@ const Features = () => {
               icon={Target} 
             />
           </div>
-          <div id="metrics" ref={metricsRef} className="feature-card-anim bg-cement-gray p-8 md:p-10 flex flex-col justify-center items-center text-center aspect-square md:aspect-[4/5] shadow-[0_0_50px_rgba(74,222,128,0.1)] relative overflow-hidden border-2 border-competition-green/40 group">
+          <div id="metrics" ref={metricsRef} className="feature-card-anim bg-cement-gray p-8 md:p-10 flex flex-col justify-center items-center text-center aspect-square md:aspect-[4/5] shadow-[0_0_50px_rgba(199,247,0,0.1)] relative overflow-hidden border-2 border-competition-green/40 group">
              <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-20 transition-opacity">
                 <TrendingUp size={120} />
              </div>
              <div className="absolute -bottom-10 -left-10 opacity-5 pointer-events-none select-none">
-                <span className="text-9xl font-black text-stroke">STATS</span>
+                <span className="text-7xl md:text-9xl font-black text-stroke">STATS</span>
              </div>
              
-             <p className="text-lg md:text-xl font-black italic tracking-widest text-competition-green mb-4">
+             <p className="text-base sm:text-lg md:text-xl font-black italic tracking-widest text-competition-green mb-4">
                 AUMENTO DE FUERZA
              </p>
-             <h4 className="text-7xl md:text-9xl font-[900] font-jersey leading-none text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+             <h4 className="text-6xl sm:text-7xl md:text-9xl font-[900] font-jersey leading-none text-white tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                 +{count}%
              </h4>
-             <p className="text-white/60 mt-6 uppercase tracking-[0.3em] font-bold text-xs md:text-sm">
+             <p className="text-white/60 mt-6 uppercase tracking-[0.3em] font-bold text-[10px] sm:text-xs md:text-sm">
                 EN MIEMBROS VIP
              </p>
-             <div className="mt-8 md:mt-10 bg-competition-green/10 px-6 py-3 border border-competition-green text-competition-green font-black italic tracking-tighter pulse-green text-sm md:text-base">
+             <div className="mt-8 md:mt-10 bg-competition-green/10 px-6 py-3 border border-competition-green text-competition-green font-black italic tracking-tighter pulse-green text-xs sm:text-sm md:text-base">
                 RÉCORD DE RENDIMIENTO ★
              </div>
           </div>

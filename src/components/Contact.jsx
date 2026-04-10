@@ -60,7 +60,7 @@ const Contact = () => {
         <div className="flex flex-col lg:flex-row gap-16">
           {/* Info Side */}
           <div className="lg:w-1/3">
-            <h2 className="text-5xl md:text-6xl font-black text-white leading-none mb-10 uppercase">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-none mb-10 uppercase">
               HABLEMOS DE <span className="text-competition-green">FUERZA</span>
             </h2>
             <div className="space-y-8">

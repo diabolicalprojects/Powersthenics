@@ -87,7 +87,7 @@ const Navbar = () => {
             <a 
               key={item.name} 
               href={item.id} 
-              className="text-4xl font-black tracking-tighter text-white uppercase italic hover:text-competition-green transition-colors"
+              className="text-3xl sm:text-4xl font-black tracking-tighter text-white uppercase italic hover:text-competition-green transition-colors"
               onClick={(e) => smoothScroll(e, item.id)}
             >
               {item.name}

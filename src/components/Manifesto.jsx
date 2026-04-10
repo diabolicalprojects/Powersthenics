@@ -12,7 +12,7 @@ const Manifesto = () => {
       const chars = manifestoRef.current.querySelectorAll('span');
       
       gsap.to(chars, {
-        color: '#4ADE80',
+        color: '#C7F700',
         stagger: 0.2,
         scrollTrigger: {
           trigger: manifestoRef.current,
@@ -31,9 +31,9 @@ const Manifesto = () => {
   return (
     <section className="py-24 bg-carbon-black flex items-center justify-center overflow-hidden border-y border-competition-green/10 bg-[url('https://www.transparenttextures.com/patterns/asphalt.png')]">
       <div ref={manifestoRef} className="container mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-8xl lg:text-[10rem] font-black leading-tight tracking-[0.05em] flex flex-wrap justify-center gap-x-2 md:gap-x-10 pointer-events-none break-words">
+        <h2 className="text-3xl sm:text-5xl md:text-8xl lg:text-[10rem] font-black leading-tight tracking-[0.05em] flex flex-wrap justify-center gap-x-2 md:gap-x-10 pointer-events-none break-words">
           {text.split(" ").map((word, i) => (
-            <span key={i} className="outline-text block text-3xl md:text-7xl lg:text-[10rem]">
+            <span key={i} className="outline-text block text-2xl sm:text-5xl md:text-7xl lg:text-[10rem]">
               {word}
             </span>
           ))}

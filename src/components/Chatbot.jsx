@@ -111,7 +111,7 @@ const Chatbot = () => {
       {/* Demo Modal */}
       {isDemoModalOpen && (
         <div className="fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-carbon-black/90 backdrop-blur-sm animate-in fade-in duration-300">
-           <div className="bg-cement-gray p-8 md:p-12 max-w-lg w-full rounded-2xl border-2 border-competition-green shadow-[0_0_50px_rgba(74,222,128,0.2)] relative">
+           <div className="bg-cement-gray p-8 md:p-12 max-w-lg w-full rounded-2xl border-2 border-competition-green shadow-[0_0_50px_rgba(199,247,0,0.2)] relative">
               <button 
                 onClick={() => setIsDemoModalOpen(false)}
                 className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
@@ -143,7 +143,7 @@ const Chatbot = () => {
       {/* Floating Chatbot Button */}
       <button 
         onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-[100] w-14 h-14 bg-competition-green text-carbon-black rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(74,222,128,0.5)] hover:scale-110 active:scale-95 transition-all pulse-green"
+        className="fixed bottom-6 right-6 z-[100] w-14 h-14 bg-competition-green text-carbon-black rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(199,247,0,0.5)] hover:scale-110 active:scale-95 transition-all pulse-green"
       >
         {isOpen ? <X size={24} /> : <MessageCircle size={28} />}
       </button>
@@ -238,7 +238,7 @@ const Chatbot = () => {
                   <button 
                     onClick={sendToWhatsApp}
                     disabled={!name || !phone}
-                    className="w-full bg-competition-green text-carbon-black font-black py-3 rounded-lg text-sm uppercase tracking-tighter disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all flex items-center justify-center gap-2"
+                    className="w-full bg-competition-green text-carbon-black font-black py-3 rounded-lg text-sm uppercase tracking-tighter disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-[0_0_15px_rgba(199,247,0,0.4)] transition-all flex items-center justify-center gap-2"
                   >
                     Enviar al asesor <Send size={16} />
                   </button>

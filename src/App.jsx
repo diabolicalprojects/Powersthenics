@@ -51,7 +51,7 @@ function App() {
 
   return (
     <div className="bg-carbon-black font-body text-white selection:bg-competition-green selection:text-carbon-black overflow-x-hidden min-h-screen">
-      <div id="scroll-progress" className="fixed top-0 left-0 h-1 bg-competition-green z-[100] transition-all duration-300 shadow-[0_0_15px_#4ADE80]" />
+      <div id="scroll-progress" className="fixed top-0 left-0 h-1 bg-competition-green z-[100] transition-all duration-300 shadow-[0_0_15px_#C7F700]" />
       <Navbar />
       <main>
         <Hero />

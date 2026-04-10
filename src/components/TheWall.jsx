@@ -25,10 +25,10 @@ const WallCard = ({ level, desc, img, number }) => {
       {/* Content */}
       <div className="relative z-10 flex h-full items-center px-10 md:px-16">
         <div className="flex-1">
-          <h3 className="text-xl font-black text-competition-green tracking-[0.3em] italic mb-4">
+          <h3 className="text-sm sm:text-base md:text-xl font-black text-competition-green tracking-[0.3em] italic mb-4">
             ETAPA {number}
           </h3>
-          <h4 className="text-6xl md:text-9xl font-black text-white group-hover:text-competition-green transition-colors leading-none tracking-tighter uppercase">
+          <h4 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-white group-hover:text-competition-green transition-colors leading-none tracking-tighter uppercase">
             {level}
           </h4>
           <p className="mt-8 text-lg text-white/50 uppercase font-bold tracking-widest max-w-xl group-hover:text-white transition-colors">
@@ -95,11 +95,11 @@ const TheWall = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-24 md:mb-32">
-          <h2 className="text-6xl md:text-[10rem] font-black text-white mb-6 leading-none tracking-tighter uppercase">
+        <div className="text-center mb-16 md:mb-32">
+          <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black text-white mb-6 leading-none tracking-tighter uppercase">
              EL <span className="text-competition-green italic">MURO</span>
           </h2>
-          <p className="text-lg md:text-2xl text-white/40 uppercase font-black italic tracking-[0.4em]">
+          <p className="text-base sm:text-lg md:text-2xl text-white/40 uppercase font-black italic tracking-[0.2em] sm:tracking-[0.4em]">
             SUPERA TUS PROPIOS LÍMITES
           </p>
         </div>

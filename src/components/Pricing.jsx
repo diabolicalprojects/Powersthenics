@@ -78,13 +78,13 @@ const Pricing = () => {
   return (
     <section id="precios" ref={sectionRef} className="py-24 bg-carbon-black relative overflow-hidden">
       {/* Background Decorative Text */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.03] flex items-center justify-center select-none">
-        <span className="text-[30vw] font-black italic text-white leading-none">MEMBERSHIP</span>
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.03] flex items-center justify-center select-none overflow-hidden">
+        <span className="text-[40vw] md:text-[30vw] font-black italic text-white leading-none">MEMBERSHIP</span>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-6xl md:text-8xl font-black text-white italic tracking-tighter mb-4">
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-white italic tracking-tighter mb-4">
             ELIGE TU <span className="text-competition-green text-stroke-sm">NIVEL</span>
           </h2>
           <div className="flex flex-col items-center gap-2">
@@ -138,7 +138,7 @@ const Pricing = () => {
                 className={`w-full py-4 text-xs font-black italic tracking-widest uppercase transition-all ${
                   plan.popular 
                   ? 'bg-carbon-black text-competition-green hover:bg-white hover:text-carbon-black shadow-xl' 
-                  : 'bg-competition-green text-carbon-black hover:bg-white hover:shadow-[0_0_20px_rgba(74,222,128,0.2)]'
+                  : 'bg-competition-green text-carbon-black hover:bg-white hover:shadow-[0_0_20px_rgba(199,247,0,0.2)]'
                 }`}
               >
                 {plan.cta}
