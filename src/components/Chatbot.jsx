@@ -119,17 +119,22 @@ const Chatbot = () => {
               >
                 <X size={24} />
               </button>
-              <div className="flex justify-center mb-6">
-                 <div className="w-16 h-16 bg-competition-green text-carbon-black rounded-full flex items-center justify-center pulse-green">
-                    <Info size={32} />
-                 </div>
+              
+              <div className="flex flex-col items-center mb-8">
+                <img 
+                  src="/LOGO-DIABOLICAL-HORIZONTAL-BLANCO@2x.png" 
+                  alt="Diabolical" 
+                  className="h-8 md:h-10 w-auto mb-4" 
+                />
+                <span className="text-[10px] text-competition-green font-black tracking-[0.5em] uppercase italic">Product Showcase</span>
               </div>
-              <h2 className="text-3xl font-black text-white italic tracking-tighter text-center uppercase mb-6">Información Demo</h2>
-              <p className="text-white/70 font-bold tracking-widest text-center mb-8 uppercase leading-relaxed">
+
+              <h2 className="text-3xl font-black text-white italic tracking-tighter text-center uppercase mb-6 leading-none">Información <br/><span className="text-competition-green">de Demo</span></h2>
+              <p className="text-white/70 font-bold tracking-widest text-center mb-8 uppercase leading-relaxed text-sm">
                 Esta página es una demostración funcional de diseño y tecnología para centros deportivos de alto rendimiento.
               </p>
               <div className="space-y-4">
-                <p className="text-competition-green text-[10px] font-black tracking-[0.3em] text-center uppercase italic">Si buscas implementar una solución similar:</p>
+                <p className="text-white/30 text-[9px] font-black tracking-[0.3em] text-center uppercase italic underline underline-offset-4 decoration-competition-green/40">Si buscas un despliegue similar para tu marca:</p>
                 <button 
                   onClick={() => window.open('https://wa.me/524495136907?text=Hola!%20Me%20interesa%20implementar%20una%20web%20como%20la%20de%20Powersthenics', '_blank')}
                   className="w-full bg-competition-green text-carbon-black font-black py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-white transition-all uppercase tracking-tighter italic"
