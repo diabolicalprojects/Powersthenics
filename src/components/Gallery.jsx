@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {
   const sectionRef = useRef(null);
-  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedIdx, setSelectedIdx] = useState(null);
   
   const images = [
     "/466795676_17999912591703592_71864999979196931_n.jpg",
@@ -19,6 +19,28 @@ const Gallery = () => {
     "/500097437_18022177343703592_6430570242741941642_n.jpg",
     "/500386496_18022177316703592_6483592524356522261_n.jpg"
   ];
+
+  const handlePrev = (e) => {
+    e?.stopPropagation();
+    setSelectedIdx(prev => (prev > 0 ? prev - 1 : images.length - 1));
+  };
+
+  const handleNext = (e) => {
+    e?.stopPropagation();
+    setSelectedIdx(prev => (prev < images.length - 1 ? prev + 1 : 0));
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedIdx === null) return;
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'Escape') setSelectedIdx(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIdx]);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -57,22 +79,44 @@ const Gallery = () => {
   return (
     <section id="galeria" ref={sectionRef} className="py-24 bg-carbon-black overflow-hidden relative">
       {/* Lightbox Modal */}
-      {selectedImg && (
+      {selectedIdx !== null && (
         <div 
-          className="fixed inset-0 z-[1000] bg-carbon-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10 cursor-zoom-out"
-          onClick={() => setSelectedImg(null)}
+          className="fixed inset-0 z-[1000] bg-carbon-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10"
+          onClick={() => setSelectedIdx(null)}
         >
+          {/* Close Button */}
           <button 
-            className="absolute top-6 right-6 text-white/50 hover:text-competition-green transition-colors z-50 p-2"
-            onClick={() => setSelectedImg(null)}
+            className="absolute top-6 right-6 text-white/50 hover:text-competition-green transition-colors z-[1001] p-2"
+            onClick={() => setSelectedIdx(null)}
           >
             <X size={40} strokeWidth={1.5} />
           </button>
+
+          {/* Navigation Buttons */}
+          <button 
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/30 hover:text-competition-green transition-all z-[1001] p-2 hover:scale-110 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm"
+            onClick={handlePrev}
+          >
+            <ChevronLeft size={48} strokeWidth={1} />
+          </button>
+
+          <button 
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/30 hover:text-competition-green transition-all z-[1001] p-2 hover:scale-110 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm"
+            onClick={handleNext}
+          >
+            <ChevronRight size={48} strokeWidth={1} />
+          </button>
+
+          {/* Index Indicator */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/30 font-black italic tracking-widest text-xs z-[1001]">
+            IMAGE_{selectedIdx + 1} / {images.length}
+          </div>
           
           <img 
-            src={selectedImg} 
+            key={selectedIdx}
+            src={images[selectedIdx]} 
             alt="Gym Gallery Full" 
-            className="max-w-full max-h-full object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 animate-in zoom-in duration-300"
+            className="max-w-full max-h-full object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/10 animate-in zoom-in duration-300 pointer-events-none"
           />
         </div>
       )}
@@ -96,7 +140,7 @@ const Gallery = () => {
             <div 
               key={idx} 
               className="gallery-item relative group overflow-hidden break-inside-avoid cursor-zoom-in"
-              onClick={() => setSelectedImg(img)}
+              onClick={() => setSelectedIdx(idx)}
             >
               <img 
                 src={img} 
