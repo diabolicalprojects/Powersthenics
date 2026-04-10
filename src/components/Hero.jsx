@@ -5,12 +5,20 @@ import { ChevronRight } from 'lucide-react';
 const Hero = () => {
   const containerRef = useRef(null);
   const textRef = useRef(null);
+  const videoRef = useRef(null);
 
   const handleCTAClick = () => {
     window.open('https://wa.me/524495136907?text=Hola!%20Quiero%20empezar%20el%20desafío%20en%20Powersthenics', '_blank');
   };
 
   useEffect(() => {
+    // Force video play for mobile devices
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Video autoplay failed:", error);
+      });
+    }
+
     let ctx = gsap.context(() => {
       const tl = gsap.timeline();
       tl.fromTo(textRef.current, 
@@ -81,10 +89,12 @@ const Hero = () => {
       <div className="absolute top-0 right-0 w-full lg:w-3/4 h-full pointer-events-none overflow-hidden select-none">
         <div className="hero-video-container absolute inset-0 bg-carbon-black h-[120%]">
           <video 
+            ref={videoRef}
             autoPlay 
             muted 
             loop 
             playsInline 
+            webkit-playsinline="true"
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 opacity-60"
           >
