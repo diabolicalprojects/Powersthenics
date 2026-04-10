@@ -15,13 +15,25 @@ Este proyecto está configurado para desplegarse en Dokploy usando Docker.
 
 3. **Configuración del Contenedor**:
 
-   | Parámetro | Valor |
-   |-----------|-------|
-   | **Branch** | `main` |
-   | **Dockerfile Path** | `Dockerfile` (raíz del proyecto) |
-   | **Port** | `80` |
-   | **Build Command** | `npm run build` |
-   | **Start Command** | `nginx -g "daemon off;"` |
+    | Parámetro | Valor |
+    |-----------|-------|
+    | **Branch** | `main` |
+    | **Dockerfile Path** | `Dockerfile` (raíz del proyecto) |
+    | **Port** | `80` |
+    | **Build Command** | `npm run build` |
+    | **Start Command** | `node server.js` |
+
+### ✨ Característica: Enlace Único (Anti-Share)
+
+Hemos implementado una lógica de seguridad para que las demos sean personales e intransferibles:
+
+1. **Formato del Enlace**: Para enviar una demo a un cliente, añade un parámetro `t` (token) al final de la URL.
+   - Ejemplo: `https://powers-demo.diabolicalservices.tech/?t=cliente123`
+2. **Lógica de Bloqueo**: 
+   - La **primera vez** que alguien abre el enlace con un token específico, este se vincula a su dirección IP.
+   - Si ese mismo cliente intenta abrirlo desde otro dispositivo, o si comparte el enlace con alguien más, el servidor detectará una IP diferente y **bloqueará el acceso**.
+3. **Persistencia**: La lista de bloqueos se guarda en `access_locks.json`, por lo que sobrevive a reinicios del servidor.
+
 
 ### Variables de Entorno (si son necesarias)
 
