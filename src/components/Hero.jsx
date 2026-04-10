@@ -12,8 +12,10 @@ const Hero = () => {
   };
 
   useEffect(() => {
-    // Force video play for mobile devices
+    // Force video settings for iOS and mobile
     if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.defaultMuted = true;
       videoRef.current.play().catch(error => {
         console.log("Video autoplay failed:", error);
       });
@@ -89,7 +91,7 @@ const Hero = () => {
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 opacity-60"
           >
-            <source src="/E1176cbd-Be69-42D3-93Ee-4255226413D2.mp4" type="video/mp4" />
+            <source src="/hero-video.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-carbon-black via-carbon-black/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-carbon-black via-transparent to-carbon-black/40" />
