@@ -30,6 +30,9 @@ function loadLocks() {
 
 // Logic for Unique Link
 app.use((req, res, next) => {
+    // Bloqueador desactivado temporalmente a petición
+    return next();
+    
     try {
         // Exclude static assets from lock logic
         if (req.path.includes('.') && !req.path.endsWith('.html')) {
